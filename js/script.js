@@ -3,18 +3,10 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
-/*** 
- * `quotes` array 
-***/
 //Create variable named 'quotes' 
 let quotes = [];
 
-//Add five empty, comma separated objects to the array
-
+//Add five empty, comma separated objects to the array. 
 for (i = 0; i < 5; i ++) {
   quotes.push({})
    }
@@ -34,13 +26,13 @@ for (i = 0; i < 5; i ++) {
   quotes[0].citation = 'Dr. Seuss The Lorax';
   quotes[0].year = 1971;
 
+  //Add additional quote object property [For exceeds grade]
+   quotes[4].tags = 'PowerPuff Girls';
+
   // console.log(quotes[0]);
  
-  /***
- * `getRandomQuote` function
-In the function body, create a variable to store a random number ranging from zero to the index of the last item in the quotes array.
-Lastly, the function should return a random quote object using the random number variable above and bracket notation on the quotes array.
-***/
+//Create getRandomQuote function: create a variable to store a random number representing the index of the quotes array, return a random quote object using the random number variable and bracket notation on the quotes array.
+
 function getRandomQuote (){
   const randomNumber = Math.floor( Math.random() *quotes.length );
   return quotes[randomNumber];
@@ -48,12 +40,11 @@ function getRandomQuote (){
 
 //console.log(getRandomQuote());
 
-/***
- * `printQuote` function
-***/
+// Create printQuote function
+
 function printQuote(){
 //console.log('printing quote');
-//In the body of the printQuote function, create a variable to store a random quote object from the getRandomQuote() function
+//Create a variable to store a random quote object from the getRandomQuote() function
 let randomQuote = getRandomQuote();
 //console.log(randomQuote['source']);
 //Create another variable to store the HTML string. 
@@ -61,20 +52,23 @@ let html = `<p class="quote"> ${randomQuote.quote} </p>
 <p class="source"> ${randomQuote.source}
 `;
 
-//Create two separate if statements below the variables
-//1. If the random quote object has a citation property, concatenate a <span> element with the class "citation" to the HTML string.
+//If the random quote object has a citation property, concatenate a <span> element with the class "citation" to the HTML string.
 if (randomQuote.citation){html += `<span class="citation"> ${randomQuote.citation} </span>`};
 
-//2. If the random quote object has a year property, concatenate a <span> element with the class "year" to the HTML string
+//If the random quote object has a year property, concatenate a <span> element with the class "year" to the HTML string
 if (randomQuote.year){html += `<span class="year"> ${randomQuote.year} </span>`};
 
-//Below the if statements, complete the string by concatenating a closing </p> tag to the HTML string. This is the closing tag for the second paragraph with the class source.
+//If the random quote object has a tag property, concatenate a <span> element with the class "tag" to the HTML string
+if (randomQuote.tags){html += `<span class="tags"> ${randomQuote.tags} </span>`};
 
+//Complete the string by concatenating a closing </p> tag to the HTML string.
 html += `</p>`;
 
-// Use the following code snippet, along with the variable storing the string you’ve assembled, to update your project’s HTML with a random quote. This runs on load, not at an event. need to create a function and call it.
+//Use code snippet and variable storing the string, to update the HTML with a random quote. This runs on load so is in the function so it can be called.
+
 document.getElementById('quote-box').innerHTML = html;
-//Set the printQuote function to return the full HTML string displaying a random quote.
+
+//Random background colors when a new quote prints to the page [for exceeds grade]
 
 const randomValue = () => Math.floor(Math.random() * 256);
 function randomRGB(value){
@@ -83,13 +77,19 @@ function randomRGB(value){
 }
 
 document.body.style.backgroundColor = randomRGB(randomValue);
+
+//function to return the full HTML string displaying a random quote.
 return html;
 
 }
 
+//Auto-refreshed quotes using setInterval() method every 10 seconds [for exceeds grade]
+
+setInterval(printQuote,10000);
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
+
