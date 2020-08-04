@@ -46,16 +46,44 @@ function getRandomQuote (){
   return quotes[randomNumber];
 }
 
-console.log(getRandomQuote());
+//console.log(getRandomQuote());
+
 /***
  * `printQuote` function
 ***/
+function printQuote(){
+  console.log('printing quote');
+//In the body of the printQuote function, create a variable to store a random quote object from the getRandomQuote() function
+let randomQuote = getRandomQuote();
+//console.log(randomQuote['source']);
+//Create another variable to store the HTML string. 
+let html = `<p class="quote"> ${randomQuote.quote} </p>
+<p class="source"> ${randomQuote.source}
+`;
 
+//Create two separate if statements below the variables
+//1. If the random quote object has a citation property, concatenate a <span> element with the class "citation" to the HTML string.
+if (randomQuote.citation){html += `<span class="citation"> ${randomQuote.citation} </span>`};
 
+//2. If the random quote object has a year property, concatenate a <span> element with the class "year" to the HTML string
+if (randomQuote.year){html += `<span class="year"> ${randomQuote.year} </span>`};
+
+//Below the if statements, complete the string by concatenating a closing </p> tag to the HTML string. This is the closing tag for the second paragraph with the class source.
+
+// Use the following code snippet, along with the variable storing the string you’ve assembled, to update your project’s HTML with a random quote. This runs on load, not at an event. need to create a function and call it.
+document.getElementById('quote-box').innerHTML = html
+
+html += `</p>`
+
+//Set the printQuote function to return the full HTML string displaying a random quote.
+
+return html;
+
+}
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
-//document.getElementById('load-quote').addEventListener("click", printQuote, false);
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
