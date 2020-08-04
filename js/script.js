@@ -52,7 +52,7 @@ function getRandomQuote (){
  * `printQuote` function
 ***/
 function printQuote(){
-  console.log('printing quote');
+//console.log('printing quote');
 //In the body of the printQuote function, create a variable to store a random quote object from the getRandomQuote() function
 let randomQuote = getRandomQuote();
 //console.log(randomQuote['source']);
@@ -70,13 +70,19 @@ if (randomQuote.year){html += `<span class="year"> ${randomQuote.year} </span>`}
 
 //Below the if statements, complete the string by concatenating a closing </p> tag to the HTML string. This is the closing tag for the second paragraph with the class source.
 
+html += `</p>`;
+
 // Use the following code snippet, along with the variable storing the string you’ve assembled, to update your project’s HTML with a random quote. This runs on load, not at an event. need to create a function and call it.
-document.getElementById('quote-box').innerHTML = html
-
-html += `</p>`
-
+document.getElementById('quote-box').innerHTML = html;
 //Set the printQuote function to return the full HTML string displaying a random quote.
 
+const randomValue = () => Math.floor(Math.random() * 256);
+function randomRGB(value){
+  const color = `rgb( ${value()}, ${value()}, ${value()} )`// local scope
+  return color;
+}
+
+document.body.style.backgroundColor = randomRGB(randomValue);
 return html;
 
 }
